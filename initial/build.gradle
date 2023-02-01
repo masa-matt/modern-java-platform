@@ -1,0 +1,50 @@
+plugins {
+	id 'org.springframework.boot' version '3.0.0'
+	id 'io.spring.dependency-management' version '1.1.0'
+	id 'java'
+
+  id 'net.ltgt.errorprone' version '3.0.1'
+  id 'com.github.spotbugs' version '5.0.13'
+  id 'pmd'
+  // id 'org.owasp.dependencycheck' version '8.0.2'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+  implementation 'com.google.flogger:flogger:0.7.4'
+  implementation 'com.google.flogger:flogger-system-backend:0.7.4'
+  implementation 'com.google.guava:guava:31.1-jre'
+  compileOnly 'org.projectlombok:lombok:1.18.24'
+
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
+
+  errorprone 'com.google.errorprone:error_prone_core:2.18.0'
+  // spotbugsPlugins 'com.mebigfatguy.sb-contrib:sb-contrib:7.4.7'
+}
+
+test {
+	useJUnitPlatform()
+}
+
+spotbugs {
+  toolVersion = '4.7.3'
+  reportsDir = file("$buildDir/reports/spotbugs")
+  jvmArgs = [ '-Duser.language=en' ]
+}
+
+pmd {
+  consoleOutput = true
+  toolVersion = '6.37.0'
+  rulesMinimumPriority = 5
+  ruleSets = ['category/java/errorprone.xml', 'category/java/bestpractices.xml']
+}
+
