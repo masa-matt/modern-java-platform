@@ -15,4 +15,8 @@ dependency-reduced-pom.xml
 .gradle
 README.html
 .idea
+<<<<<<< Updated upstream
 *.iml
+=======
+*.iml
+>>>>>>> Stashed changes
